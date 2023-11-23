@@ -12,7 +12,10 @@
                     <h3 class="sub-title" data-aos-delay="600" data-aos="fade-up"> Get the Best Quote for your
                         electronic waste</h3>
                     <h2 class="title" data-aos="fade-up" data-aos-delay="800">#1 Government Authorized Corporate E-Waste
-                        Recycler</h2>
+                        Recycler</h2><br>
+                        <div class="hero-btn" data-aos="fade-up" data-aos-delay="1000">
+                        <a class="btn" href="#contact">Get Quote</a>
+                    </div>
                 </div>
                 <!-- Hero Content End -->
             </div>
@@ -429,7 +432,14 @@
                                         </div>
                                         <!-- Single Form End -->
                                     </div>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
+                                        <!-- Single Form Start -->
+                                        <div class="single-form">
+                                            <input type="text" placeholder="Phone *">
+                                        </div>
+                                        <!-- Single Form End -->
+                                    </div>
+                                    <div class="col-sm-6">
                                         <!-- Single Form Start -->
                                         <div class="single-form">
                                             <input type="text" placeholder="Subject *">
