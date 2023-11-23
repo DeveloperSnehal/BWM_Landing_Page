@@ -464,4 +464,4 @@
 <!-- Contact End -->
 
 
-<?php include('footer.php'); ?>
+<?php include('Footer.php'); ?>
