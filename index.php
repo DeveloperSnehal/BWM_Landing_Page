@@ -416,47 +416,47 @@
                                 <span class="sub-title">BOOK A FREE CONSULTATION</span>
                                 <h3 class="title">Get the Best Quote for E-Waste</h3>
                             </div>
-                            <form action="#">
+                            <form action="#" method="POST">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <input type="text" placeholder="Name *">
+                                            <input type="text" name="name" placeholder="Name *">
                                         </div>
                                         <!-- Single Form End -->
                                     </div>
                                     <div class="col-sm-6">
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <input type="email" placeholder="Email *">
+                                            <input type="email" name="email" placeholder="Email *">
                                         </div>
                                         <!-- Single Form End -->
                                     </div>
                                     <div class="col-sm-6">
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <input type="text" placeholder="Phone *">
+                                            <input type="text" name="tel" placeholder="Phone *">
                                         </div>
                                         <!-- Single Form End -->
                                     </div>
                                     <div class="col-sm-6">
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <input type="text" placeholder="Subject *">
+                                            <input type="text" name="subject" placeholder="Subject *">
                                         </div>
                                         <!-- Single Form End -->
                                     </div>
                                     <div class="col-sm-12">
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <textarea placeholder="Write A Message"></textarea>
+                                            <textarea name="message" placeholder="Write A Message"></textarea>
                                         </div>
                                         <!-- Single Form End -->
                                     </div>
                                     <div class="col-sm-12">
                                         <!--  Single Form Start -->
                                         <div class="form-btn">
-                                            <button class="btn btn-3" type="submit">Send Message</button>
+                                            <button class="btn btn-3" name="submit" type="submit">Send Message</button>
                                         </div>
                                         <!--  Single Form End -->
                                     </div>
@@ -473,5 +473,60 @@
 </div>
 <!-- Contact End -->
 
+<!--------- Mail-Function---------------->
+
+<?php
+
+  //Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+if(isset($_POST['submit']))
+{
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $tel = $_POST['tel'];
+  $subject =  $_POST['subject'];
+  $message = $_POST['message'];
+
+
+//Load Composer's autoloader
+require 'phpmailer/Exception.php';
+require 'phpmailer/PHPMailer.php';
+require 'phpmailer/SMTP.php';
+
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
+try {
+    //Server settings
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'mail@ewastecpcb.com';                     //SMTP username
+    $mail->Password   = 'icow abzh mwwa nwrg';                               //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+    //Recipients
+    $mail->setFrom('mail@ewastecpcb.com', 'Mailer');
+    $mail->addAddress('mail@ewastecpcb.com', 'Joe User');     //Add a recipient
+
+
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = 'Test Contact Form';
+    $mail->Body    = "Sender Name - $name <br> Sender Email - $email <br> Sender Phone No - $tel <br> Subject - $subject <br> Message - $message";
+
+    $mail->send();
+    echo "<script>alert('Your Message Has Been Sent!'); window.location='index.php';</script>";
+} catch (Exception $e) {
+    echo "<script>alert('Message could not be sent!'); window.location='index.php';</script>";
+}
+
+}
+?>
 
 <?php include('Footer.php'); ?>
